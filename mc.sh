@@ -4,11 +4,11 @@ cp $(pwd)/mc.sh /usr/bin
 mv /usr/bin/mc.sh /usr/bin/mc
 
 echo "========================="
-echo -e "\033[33m 命令行输入 mc 调用此脚本\033[0m"
 echo -e "\033[32m 感谢使用我的世界启动脚本 \033[0m"
 echo -e "\033[32m Author：筱晨~ \033[0m"
 echo -e "\033[32m 个人主页：www.svip13.cn\033[0m"
 echo -e "\033[32m Version：1.0 \033[0m"
+echo -e "\033[32m Github: https://github.com/Geek-Xiaochen/mc_start \033[0m"
 echo "========================="
 echo -e "\033[33m 请稍等... \033[0m"
 
@@ -17,7 +17,7 @@ echo -e "\033[33m 请稍等... \033[0m"
 #提取我的世界源文件位置 /root/mc/
 	route=$(find /* -name "bedrock_server"  | grep -v "proc" | cut -d "b" -f 1 )
 #Test OK!
-
+echo -e "\033[33m 终端输入 mc 调用此脚本\033[0m"
 echo -e "\033[32m 1.\033[0m 开始运行Bedrock_Server"
 echo -e "\033[32m 2.\033[0m 强制停止Bedrock_Server"
 echo -e "\033[32m 3.\033[0m 开机自启Bedrock_server"
@@ -81,8 +81,9 @@ case $num in
 		esac
     ;;
     "3")
-    		wget /usr/bin/ http://sh.svip13.cn:5212/api/v3/file/get/28/mcstart.sh?sign=1h3p2X90_yfh7zKfdFqS9Yn_wfnDzrwbvWQjFZvMPpc%3D%3A0
-    		
+    		wget https://www.svip13.cn/sh/mcstart.sh
+    		mv $(pwd)/mcstart.sh /usr/bin/mcstart.sh
+		chmod 777 /usr/bin/mcstart.sh
 
 		echo "
 [Unit]
@@ -90,6 +91,8 @@ Description=筱晨我的世界开机自启动
 After=sshd.service
 
 [Service]
+WorkingDirectory=/root
+Type=forking
 ExecStart=/usr/bin/mcstart.sh
 
 [Install]
@@ -107,6 +110,6 @@ WantedBy=multi-user.target
 		
     ;;
     *)
-	echo 1
+	echo -e "\033[32m 输入错误，请重新执行此脚本 \033[0m"
     ;;
 esac
