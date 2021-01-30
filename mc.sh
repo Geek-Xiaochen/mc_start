@@ -1,27 +1,29 @@
 #!/bin/bash
 
 cp $(pwd)/mc.sh /usr/bin
-mv /usr/bin/mc.sh /usr/bin/mc
+mv /usr/bin/mc.sh /usr/bin/mc-start
 
 echo "========================="
 echo -e "\033[32m 感谢使用我的世界启动脚本 \033[0m"
 echo -e "\033[32m Author：筱晨~ \033[0m"
-echo -e "\033[32m 个人主页：www.svip13.cn\033[0m"
-echo -e "\033[32m Version：1.0 \033[0m"
+echo -e "\033[32m Home：www.svip13.cn\033[0m"
+echo -e "\033[32m Version：1.1 \033[0m"
 echo -e "\033[32m Github: https://github.com/Geek-Xiaochen/mc_start \033[0m"
 echo "========================="
 echo -e "\033[33m 请稍等... \033[0m"
-
+echo -e "\033[32m 查找Bedrock_server目录中... \033[0m"
 #搜索我的世界源文件路径 /root/mc/bedrock_server
 	source=$(find /* -name "bedrock_server"  | grep -v "proc" )
 #提取我的世界源文件位置 /root/mc/
-	route=$(find /* -name "bedrock_server"  | grep -v "proc" | cut -d "b" -f 1 )
+	route=$(find /* -name "bedrock_server"  | grep -v "proc" | sed '$ s/bedrock_server//' )
+echo -e "\033[32m 已找到文件位置 \033[0m"
 #Test OK!
-echo -e "\033[33m 终端输入 mc 调用此脚本\033[0m"
+echo -e "\033[33m 终端输入 mc-start 调用此脚本\033[0m"
 echo -e "\033[32m 1.\033[0m 开始运行Bedrock_Server"
 echo -e "\033[32m 2.\033[0m 强制停止Bedrock_Server"
 echo -e "\033[32m 3.\033[0m 开机自启Bedrock_server"
-echo -e "\033[32m 4.\033[0m 退出脚本"
+echo -e "\033[32m 4.\033[0m 更新脚本到最新"
+echo -e "\033[32m 5.\033[0m 退出脚本"
 
 read -n1 -p "请选择：" num
 printf "\n"
@@ -35,7 +37,7 @@ case $num in
 
 	screen_name=$"mc_xiaochen"
 	screen -dmS $screen_name
-	mcstart=$"$route/bedrock_server";
+	mcstart=$""$route"bedrock_server";
 	screen -x -S $screen_name -p 0 -X stuff "$mcstart"
 	screen -x -S $screen_name -p 0 -X stuff "\n"
 	
@@ -81,9 +83,9 @@ case $num in
 		esac
     ;;
     "3")
-    		wget https://www.svip13.cn/sh/mcstart.sh
+    		wget https://www.svip13.cn/sh/mcstart/mcstart.sh > /dev/null 2>&1
     		mv $(pwd)/mcstart.sh /usr/bin/mcstart.sh
-		chmod 777 /usr/bin/mcstart.sh
+		    chmod +x /usr/bin/mcstart.sh
 
 		echo "
 [Unit]
@@ -105,6 +107,12 @@ WantedBy=multi-user.target
 
     ;;
     "4")
+    rm $(pwd)/mc.sh
+    wget https://www.svip13.cn/sh/mcstart/mc.sh > /dev/null 2>&1 && chmod +x mc.sh
+    echo -e "\033[31m 已更新至最新版本！ \033[0m"
+    bash mc.sh
+    ;;
+    "5")
     
 	echo -e "\033[32m 已退出此脚本 \033[0m"
 		
