@@ -2,7 +2,7 @@
 #搜索我的世界源文件路径 /root/mc/bedrock_server
 	source=$(find /* -name "bedrock_server"  | grep -v "proc" )
 #提取我的世界源文件位置 /root/mc/
-	route=$(find /* -name "bedrock_server"  | grep -v "proc" | cut -d "b" -f 1 )
+	route=$(find /* -name "bedrock_server"  | grep -v "proc" | sed '$ s/bedrock_server//' )
 #Test OK!
     
 	cd $route
