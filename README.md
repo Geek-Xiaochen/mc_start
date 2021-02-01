@@ -1,5 +1,5 @@
 # mc_start
-<br>一键启动Linux上的Bedrouck_Server，设为开机自启等功能 <br>
+<br>一键启动Linux上的Bedrock_Server，设为开机自启等功能 <br>
 一键启动命令：<br>
 CentOS: yum install wget <br>
 Ubuntu: apt install wget <br>
